@@ -1,0 +1,51 @@
+#include<iostream>
+#include<string>
+#include<fstream>
+ using namespace std;
+
+ class Employee{
+    public:
+    string name;
+    string ID;
+    int salary;
+    void getdata(){
+        cout<<"Enter the name of employee: "<<endl;
+        cin>>name;
+        cout<<"Enter employee ID: "<<endl;
+        cin>>ID;
+        cout<<"Enter the salary of employee: "<<endl;
+        cin>>salary;
+    }
+    void display(){
+        cout<<"The name of employee is: "<<name<<endl;
+        cout<<"The employee ID is: "<<ID<<endl;
+        cout<<"The employee salary is: "<<salary<<endl;
+    }
+ };
+
+    int main(){
+        Employee num[10];
+        fstream f;
+        int i,n;
+
+        f.open("demo.txt",ios::out);
+          cout<<"Enter the no of employees you want: "<<endl;
+          cin>>n;
+          for(i=0;i<n;i++)
+          {
+            cout<<"Enter the information of employee "<<i+1<<endl;
+            num[i].getdata();
+            f.write((char*)&num[i], sizeof num[i]);
+
+          }
+        f.close();
+        f.open("demo.txt",ios::in);
+            cout<<"Information of employees as follows: "<<endl;
+           for(i=0;i<n;i++) {
+            cout<<"Employee "<<i+1<<endl;
+           f.write((char*)&num[i], sizeof num[i]);
+            num[i].display();
+            }
+            f.close();
+            return 0;
+    }
