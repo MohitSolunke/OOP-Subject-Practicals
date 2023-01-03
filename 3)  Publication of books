@@ -1,0 +1,106 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class publication{
+    public:
+    string title;
+    float price;
+    void input(){
+        cout<<"Enter the title of publication"<<endl;
+        cin>>title;  
+        cout<<"Enter the price of publication"<<endl;
+        cin>>price;
+     }
+    void output(){
+        cout<<"The name of publication is "<<title<<endl;
+        cout<<"And its price is "<<price<<endl;
+    }
+};
+class book : public publication{
+    public:
+    int pagecount;
+    void inputpage(){
+       try{
+             input();
+             cout<<"Enter the page count "<<endl;
+             cin>>pagecount;
+           
+            if (pagecount <=0){
+                throw pagecount;
+            }
+            }
+        catch(...)
+        {
+            cout<<"Invalid Page count !!!"<<endl;
+            pagecount = 0;
+        }
+    }
+    void displaypage(){
+        cout<<"Page count is "<<pagecount<<endl;
+    }
+};
+class tape : public publication{
+    public:
+    int timecount;
+    void inputtime(){
+ try
+ {
+ input();
+cout << "Enter Play Duration of the Tape : ";
+ cin >> timecount;
+ if (timecount <= 0)
+ throw timecount;
+ }
+ catch(...)
+ {
+ cout << "\nInvalid Play Time!!!";
+ timecount = 0;
+ }
+ }
+ void displaytape()
+ {
+ output();
+ cout << "\nPlay Time : " <<timecount << " min";
+ cout << "\n--------------------------------------------------\n";
+ }
+};
+int main(){
+    book b[10];
+    tape t[10];
+    int ch, bookcount = 0, tapecount = 0;
+    while (true){
+        cout<<"Enter the choice"<<endl;
+        cout<<"1) Add Book Information"<<endl;
+        cout<<"2) Add Tape Information"<<endl;
+        cout<<"3) Display Book Information"<<endl;
+        cout<<"4) Display Tape Information"<<endl;
+        cout<<"5) Exit "<<endl;
+        cin>>ch;
+        switch(ch){
+            case 1 :
+                    b[bookcount].inputpage();
+                    bookcount ++;
+                    break;
+            case 2 :
+                    t[tapecount].inputtime();
+                    tapecount ++;
+                    break;
+            case 3 :
+                    cout<<"All books information"<<endl;
+                    for(int i = 0; i<bookcount; i++){
+                        b[i].displaypage();
+                    }
+                    break;
+            case 4 :
+                    cout<<"All Tape information"<<endl;
+                    for (int j = 0; j<tapecount; j++){
+                        t[j].displaytape();
+                    }
+                    break;
+            case 5 :
+                  cout<<"Thanks for using Program"<<endl;
+                  return 0;
+        }
+    }
+    }
